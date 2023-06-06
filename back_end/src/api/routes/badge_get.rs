@@ -200,5 +200,8 @@ pub fn svg_response(svg: &str) -> impl IntoResponse {
         header::CONTENT_TYPE,
         HeaderValue::from_static("image/svg+xml"),
     );
+    response
+        .headers_mut()
+        .insert(header::CACHE_CONTROL, HeaderValue::from_static("no-cache"));
     response.into_response()
 }

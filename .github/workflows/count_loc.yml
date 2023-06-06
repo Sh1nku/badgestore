@@ -13,17 +13,15 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Count lines of code
-        id: loc
+      - uses: actions/checkout@v3
+      - id: loc
+        name: Count lines of code
         uses: Sh1nku/count-loc-action@v1
         with:
-          excluded: '*.json,*.svg,*.md,*.toml'
-
-      - name: Update badge
-        uses: Sh1nku/update-badgestore-badge-action@v1
+          excluded: "*.json,*.svg,*.md"
+      - uses: Sh1nku/badgestore-update-badge-action@v1
+        name: Update badge
+        id: badge
         with:
-          right-label: ${{ steps.loc.outputs.sum }}
-          read-write-key: ${{ secrets.BADGE_AUTH }}
+          right-label: ${{ steps.loc.outputs.Total_code }}
+          read-write-key: ${{ secrets.BADGESTORE_RW_KEY }}
