@@ -1,0 +1,29 @@
+name: Count lines of code for the project, and upload to the badge store
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  count-loc-and-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Count lines of code
+        id: loc
+        uses: Sh1nku/count-loc-action@v1
+        with:
+          excluded: '*.json,*.svg,*.md,*.toml'
+
+      - name: Update badge
+        uses: Sh1nku/update-badgestore-badge-action@v1
+        with:
+          right-label: ${{ steps.loc.outputs.sum }}
+          read-write-key: ${{ secrets.BADGE_AUTH }}
