@@ -25,3 +25,4 @@ jobs:
         with:
           right-label: ${{ steps.loc.outputs.Total_code }}
           read-write-key: ${{ secrets.BADGESTORE_RW_KEY }}
+      - uses: koki-develop/hub-purge-action@v1
