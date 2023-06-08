@@ -22,3 +22,35 @@ Take a look at [api.badgestore.dev](https://api.badgestore.dev)
 Take a look at [api.badgestore.dev](https://api.badgestore.dev)
 #### Using the github action
 Take a look at [Sh1nku/badgestore-update-badge-action](https://github.com/Sh1nku/badgestore-update-badge-action)
+### Examples
+A github action for updating the lines of code of the repo, and updating a badge given a secret called `BADGESTORE_RW_KEY` with the value `read_key:write_key`
+```yaml
+name: Count lines of code for the project, and upload to the badge store
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  count-loc-and-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - id: loc
+        name: Count lines of code
+        uses: Sh1nku/count-loc-action@v1
+        with:
+          excluded: "*.json,*.svg,*.md"
+      - uses: Sh1nku/badgestore-update-badge-action@v1
+        name: Update badge
+        id: badge
+        with:
+          right-label: ${{ steps.loc.outputs.Total_code }}
+          read-write-key: ${{ secrets.BADGESTORE_RW_KEY }}
+      - uses: koki-develop/hub-purge-action@v1
+```
