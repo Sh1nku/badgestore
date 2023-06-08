@@ -22,6 +22,7 @@ use sqlx::MySqlPool;
         (status = 200, description = "Updated sucessfully", body = BadgeData),
         (status = 400, description = "Bad request"),
         (status = 403, description = "Invalid write key"),
+        (status = 429, description = "Too many requests"),
         (status = 500, description = "Internal server error")
     ),
     security(

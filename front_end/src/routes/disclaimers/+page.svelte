@@ -2,6 +2,10 @@
     import Li from '../../components/li.svelte'
 </script>
 
+<svelte:head>
+    <link rel="canonical" href="https://badgestore.dev/disclaimers" />
+</svelte:head>
+
 <h1 class="font-mono font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center">
     Disclamers
 </h1>

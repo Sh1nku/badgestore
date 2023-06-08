@@ -23,6 +23,10 @@
     setContext("badge_auth", s_badge_auth);
 </script>
 
+<svelte:head>
+    <link rel="canonical" href="https://badgestore.dev/" />
+</svelte:head>
+
 <h1 class="font-mono font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center">
     Store and update the contents of your badges
 </h1>

@@ -13,7 +13,7 @@ use sqlx::MySqlPool;
     request_body = CreateBadge,
     tag = "Badge",
     responses(
-        (status = 200, description = "Created successfully", body = KeyResult),
+        (status = 201, description = "Created successfully", body = KeyResult),
         (status = 400, description = "Bad request"),
         (status = 500, description = "Internal server error")
     )
