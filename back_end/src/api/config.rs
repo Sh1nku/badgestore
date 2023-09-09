@@ -65,7 +65,7 @@ pub async fn seed(pool: &MySqlPool) -> Result<(), Box<dyn error::Error>> {
     "#,
     )
     .bind(password.hash)
-    .execute(&mut tx)
+    .execute(&mut *tx)
     .await?;
     sqlx::query(
         r#"
@@ -75,7 +75,7 @@ pub async fn seed(pool: &MySqlPool) -> Result<(), Box<dyn error::Error>> {
                );
     "#,
     )
-    .execute(&mut tx)
+    .execute(&mut *tx)
     .await?;
     tx.commit().await?;
     Ok(())

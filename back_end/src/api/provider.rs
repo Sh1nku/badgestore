@@ -49,7 +49,7 @@ pub async fn create_badge_in_database(
     )
     .bind(&password.read_key)
     .bind(&password.hash)
-    .execute(&mut tx)
+    .execute(&mut *tx)
     .await?;
     sqlx::query(
         r#"
@@ -62,7 +62,7 @@ pub async fn create_badge_in_database(
     .bind(badge.right_label)
     .bind(badge.right_color.trim_start_matches('#').to_string())
     .bind(&password.read_key)
-    .execute(&mut tx)
+    .execute(&mut *tx)
     .await?;
     tx.commit().await?;
     Ok(KeyResult {
@@ -109,7 +109,7 @@ pub async fn update_badge_in_database(
         .bind(db_badge.right_label)
         .bind(db_badge.right_color)
         .bind(read_key)
-        .execute(&mut tx)
+        .execute(&mut *tx)
         .await?;
         sqlx::query(
             r#"
@@ -118,7 +118,7 @@ pub async fn update_badge_in_database(
             WHERE read_key = ?;"#,
         )
         .bind(read_key)
-        .execute(&mut tx)
+        .execute(&mut *tx)
         .await?;
         tx.commit().await?;
     }
