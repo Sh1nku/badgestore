@@ -1,5 +1,5 @@
 # Badgestore
-![Lines of Code badge](https://api.badgestore.dev/badge/108db75934eb5ec0/local)
+![Lines of Code badge](https://api.badgestore.dev/badge/108db75934eb5ec0/local?style=flat-square)
 
 This is the front-end and back-end for [badgestore.dev](https://badgestore.dev). The website allows you to create badges, and update them.
 
